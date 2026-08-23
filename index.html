@@ -109,6 +109,7 @@
     background:var(--accent);color:#04140f;border-color:var(--accent);font-weight:600;
   }
   .btn.primary:hover{background:#4aeed3;color:#04140f;}
+  .btn.primary.copied{background:var(--text);border-color:var(--text);color:var(--bg);}
 
   .menu-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);width:38px;height:38px;align-items:center;justify-content:center;cursor:pointer;}
 
@@ -429,7 +430,7 @@
     </nav>
     <div class="nav-cta">
       <a class="btn" href="https://linkedin.com/in/kaif-jamil01" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn primary" href="mailto:kaifjamil01@gmail.com">Get in touch</a>
+      <a class="btn primary copy-email" href="mailto:kaifjamil01@gmail.com" data-email="kaifjamil01@gmail.com">Get in touch</a>
     </div>
   </div>
 </header>
@@ -446,7 +447,7 @@
         <div class="role-line">Senior Software Engineer · Site Reliability &amp; DevOps</div>
         <p class="lede">Six years operating cloud and Kubernetes estates in high-availability environments — turning manual, error-prone operations into Terraform-provisioned automation, and incidents into dashboards that catch problems before users do.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="mailto:kaifjamil01@gmail.com">kaifjamil01@gmail.com</a>
+          <a class="btn primary copy-email" href="mailto:kaifjamil01@gmail.com" data-email="kaifjamil01@gmail.com">kaifjamil01@gmail.com</a>
           <a class="btn" href="https://linkedin.com/in/kaif-jamil01" target="_blank" rel="noopener">in/kaif-jamil01</a>
           <a class="btn" href="https://x.com/KaifJamil" target="_blank" rel="noopener">@KaifJamil</a>
         </div>
@@ -818,7 +819,7 @@
         <p>Open to Senior Engineer, SRE and DevOps roles — reach out directly or connect on LinkedIn.</p>
       </div>
       <div class="footer-links">
-        <a class="btn primary" href="mailto:kaifjamil01@gmail.com">kaifjamil01@gmail.com</a>
+        <a class="btn primary copy-email" href="mailto:kaifjamil01@gmail.com" data-email="kaifjamil01@gmail.com">kaifjamil01@gmail.com</a>
         <a class="btn" href="tel:+919560512061">+91-9560512061</a>
         <a class="btn" href="https://linkedin.com/in/kaif-jamil01" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://x.com/KaifJamil" target="_blank" rel="noopener">X / Twitter</a>
@@ -857,6 +858,27 @@
     });
   }, {rootMargin:'-40% 0px -50% 0px'});
   sections.forEach(s=>{ if(s.id) navIo.observe(s); });
+
+  // email copy fallback — mailto: links depend on the visitor's OS having
+  // a default mail client configured, which isn't guaranteed on desktop.
+  // Copying the address guarantees a usable fallback either way.
+  const copyButtons = document.querySelectorAll('.copy-email');
+  copyButtons.forEach(btn=>{
+    btn.addEventListener('click', function(e){
+      const email = this.getAttribute('data-email');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(email).catch(()=>{});
+      }
+      const original = this.textContent;
+      this.textContent = 'Copied ' + email;
+      this.classList.add('copied');
+      setTimeout(()=>{
+        this.textContent = original;
+        this.classList.remove('copied');
+      }, 1800);
+      // let the mailto: navigation still attempt in parallel
+    });
+  });
 </script>
 
 </body>
