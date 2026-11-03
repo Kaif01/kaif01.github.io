@@ -68,9 +68,13 @@
   /* ---------- NAV ---------- */
   header.nav{
     position:sticky;top:0;z-index:100;
+    -webkit-backdrop-filter:blur(10px);
     backdrop-filter:blur(10px);
     background:rgba(10,14,20,0.82);
     border-bottom:1px solid var(--border-soft);
+    transform:translateZ(0);
+    will-change:transform;
+    backface-visibility:hidden;
   }
   .nav-inner{
     max-width:1080px;margin:0 auto;padding:16px 28px;
@@ -517,13 +521,15 @@
         </div>
         <div class="job-co">Donyati <span class="pill">CURRENT</span></div>
         <ul>
+          <li>Built Ops Inspector, a local query tool unifying database lookups and S3 manifest queries into one browser UI across four ingest environments, supporting the NBCUniversal streaming platform.</li>
+          <li>Supporting NBCUniversal's streaming platform — troubleshooting media-asset issues and handling day-to-day operational requests across ingest and delivery.</li>
           <li>Leading Kubernetes cluster upgrades on AWS with zero-downtime rollout and rollback safety as standard practice.</li>
           <li>Building and maintaining Grafana dashboards giving real-time visibility into system health and operational metrics.</li>
           <li>Designed a Slack application that automates routine operational workflows, cutting response time on support requests.</li>
           <li>Partnering across engineering teams to surface automation opportunities in recurring DevOps work.</li>
         </ul>
         <div class="tag-row">
-          <span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">Grafana</span><span class="tag">Slack API</span>
+          <span class="tag">NBCUniversal</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">MongoDB</span><span class="tag">Grafana</span><span class="tag">Slack API</span>
         </div>
       </div>
 
